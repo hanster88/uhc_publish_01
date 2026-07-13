@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UHC Admin | 관리자 대시보드</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{--bg:#14120f;--panel:#1d1a15;--line:#2e2a22;--gold:#a8894f;--txt:#e8e4da;--dim:#8c867a;--ok:#7fae7a;--warn:#c8964f}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Pretendard Variable','Pretendard','Noto Sans KR',sans-serif;background:var(--bg);color:var(--txt);font-weight:300;font-size:14px}
+  button{font-family:inherit}
+
+  /* login */
+  .gate{position:fixed;inset:0;background:var(--bg);z-index:50;display:flex;align-items:center;justify-content:center}
+  .gate-box{width:360px;padding:52px 44px;background:var(--panel);border:1px solid var(--line);text-align:center}
+  .gate-box .lg{font-family:'IvyMode','Cormorant Garamond',serif;font-size:30px;letter-spacing:.34em;color:var(--txt)}
+  .gate-box .sub{font-size:11px;letter-spacing:.3em;color:var(--gold);margin:6px 0 34px;text-transform:uppercase}
+  .gate-box input{width:100%;padding:13px 14px;margin-bottom:12px;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:14px}
+  .gate-box input:focus{outline:none;border-color:var(--gold)}
+  .gate-box button{width:100%;padding:14px;background:var(--gold);border:none;color:#fff;letter-spacing:.24em;text-transform:uppercase;font-size:12px;cursor:pointer;margin-top:8px}
+  .gate-box .hint{margin-top:18px;font-size:11.5px;color:var(--dim)}
+  .gate-box .err{color:#c47b6a;font-size:12px;margin-top:10px;display:none}
+
+  /* layout */
+  .shell{display:none;min-height:100vh}
+  .shell.on{display:grid;grid-template-columns:230px 1fr}
+  aside{background:var(--panel);border-right:1px solid var(--line);padding:34px 0;position:sticky;top:0;height:100vh}
+  aside .lg{font-family:'IvyMode','Cormorant Garamond',serif;font-size:22px;letter-spacing:.34em;padding:0 28px 30px;display:block;color:var(--txt)}
+  aside .lg small{display:block;font-size:9px;letter-spacing:.3em;color:var(--gold);font-family:'Noto Sans KR';margin-top:4px}
+  .menu button{display:flex;gap:12px;align-items:center;width:100%;background:none;border:none;color:var(--dim);padding:14px 28px;font-size:13.5px;cursor:pointer;text-align:left;border-left:2px solid transparent}
+  .menu button.on{color:var(--txt);background:rgba(168,137,79,.08);border-left-color:var(--gold)}
+  .menu button:hover{color:var(--txt)}
+  aside .foot{position:absolute;bottom:26px;left:28px;right:28px;font-size:11px;color:var(--dim);line-height:1.8}
+  aside .foot a{color:var(--gold);text-decoration:none}
+
+  main{padding:38px 44px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}
+  .topbar h1{font-size:20px;font-weight:500}
+  .topbar .demo{font-size:10px;letter-spacing:.22em;color:var(--gold);border:1px solid var(--gold);padding:5px 12px;text-transform:uppercase}
+  .panel{background:var(--panel);border:1px solid var(--line);padding:26px;margin-bottom:22px}
+  .panel h2{font-size:14px;font-weight:500;margin-bottom:18px;color:var(--txt);display:flex;justify-content:space-between;align-items:center}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-bottom:22px}
+  .kpi{background:var(--panel);border:1px solid var(--line);padding:24px}
+  .kpi .k{font-size:11px;letter-spacing:.18em;color:var(--dim);text-transform:uppercase}
+  .kpi .v{font-family:'IvyMode','Cormorant Garamond',serif;font-size:38px;color:var(--gold);margin-top:8px;line-height:1}
+  .kpi .d{font-size:11.5px;margin-top:8px}
+  .up{color:var(--ok)} .dn{color:#c47b6a}
+  .grid2{display:grid;grid-template-columns:1.6fr 1fr;gap:22px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{color:var(--dim);font-weight:400;text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase}
+  td{padding:12px 8px;border-bottom:1px solid var(--line)}
+  .tag{display:inline-block;padding:3px 10px;font-size:11px;border:1px solid var(--line);color:var(--dim)}
+  .tag.kakao{border-color:#FEE500;color:#FEE500}
+  .tag.google{border-color:#7fa8e8;color:#7fa8e8}
+  .tag.on{border-color:var(--ok);color:var(--ok)}
+  .tag.off{border-color:var(--dim)}
+  .btn{background:var(--gold);border:none;color:#fff;padding:10px 20px;font-size:12px;letter-spacing:.14em;cursor:pointer}
+  .btn.ghost{background:none;border:1px solid var(--line);color:var(--dim)}
+  .btn.ghost:hover{border-color:var(--gold);color:var(--gold)}
+  .btn.sm{padding:5px 12px;font-size:11px}
+  .formrow{display:grid;grid-template-columns:repeat(4,1fr) auto;gap:10px;margin-top:16px}
+  .formrow input,.formrow select{padding:10px 12px;background:var(--bg);border:1px solid var(--line);color:var(--txt);font-size:13px}
+  .formrow input:focus{outline:none;border-color:var(--gold)}
+  .tab{display:none}.tab.on{display:block}
+  .note{font-size:12px;color:var(--dim);line-height:1.9;border-left:2px solid var(--gold);padding-left:14px;margin-top:16px}
+  canvas{max-height:280px}
+  @media(max-width:1000px){.shell.on{grid-template-columns:1fr}aside{display:none}.kpis{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.formrow{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<!-- ══ LOGIN GATE ══ -->
+<div class="gate" id="gate">
+  <div class="gate-box">
+    <span class="lg">UHC</span>
+    <p class="sub">Admin Console</p>
+    <input type="text" id="gid" placeholder="아이디" autocomplete="off">
+    <input type="password" id="gpw" placeholder="비밀번호">
+    <button onclick="tryLogin()">로그인</button>
+    <p class="err" id="gerr">아이디 또는 비밀번호가 올바르지 않습니다.</p>
+    <p class="hint">시안 데모 계정 — ID: admin / PW: uhc2026</p>
+  </div>
+</div>
+
+<!-- ══ SHELL ══ -->
+<div class="shell" id="shell">
+  <aside>
+    <a class="lg" href="index.html">UHC<small>ADMIN CONSOLE</small></a>
+    <div class="menu">
+      <button class="on" data-tab="dash">트래픽 대시보드</button>
+      <button data-tab="members">회원 관리</button>
+      <button data-tab="hotels">지점 관리</button>
+      <button data-tab="events">이벤트 · 배너</button>
+      <button data-tab="images">이미지 교체</button>
+    </div>
+    <div class="foot">
+      로그인: 관리자<br>
+      <a href="index.html">← 사이트로 돌아가기</a><br>
+      <a href="#" onclick="logout();return false;">로그아웃</a>
+    </div>
+  </aside>
+
+  <main>
+    <div class="topbar">
+      <h1 id="tabTitle">트래픽 대시보드</h1>
+      <span class="demo">Demo Data — GA4 연동 전</span>
+    </div>
+
+    <!-- ── TAB: DASH ── -->
+    <div class="tab on" id="tab-dash">
+      <div class="kpis">
+        <div class="kpi"><p class="k">오늘 방문자</p><p class="v">1,284</p><p class="d up">▲ 12.4% vs 어제</p></div>
+        <div class="kpi"><p class="k">이번 주 페이지뷰</p><p class="v">38,502</p><p class="d up">▲ 8.1% vs 지난주</p></div>
+        <div class="kpi"><p class="k">예약 버튼 클릭</p><p class="v">642</p><p class="d up">▲ 21.9% (STATION 유입)</p></div>
+        <div class="kpi"><p class="k">신규 가입</p><p class="v" id="kpiMembers">3</p><p class="d">카카오 58% · 구글 31%</p></div>
+      </div>
+      <div class="grid2">
+        <div class="panel"><h2>주간 방문 추이</h2><canvas id="chTraffic"></canvas></div>
+        <div class="panel"><h2>국가별 유입</h2><canvas id="chGeo"></canvas></div>
+      </div>
+      <div class="panel"><h2>페이지별 조회수 (7일)</h2>
+        <table>
+          <tr><th>페이지</th><th>조회수</th><th>평균 체류</th><th>예약 전환</th></tr>
+          <tr><td>/ (메인)</td><td>14,201</td><td>1:42</td><td>3.2%</td></tr>
+          <tr><td>/suite</td><td>9,876</td><td>2:18</td><td>5.1%</td></tr>
+          <tr><td>/flat</td><td>6,432</td><td>1:56</td><td>4.4%</td></tr>
+          <tr><td>/continental</td><td>4,105</td><td>2:03</td><td>4.9%</td></tr>
+          <tr><td>/stonehouse</td><td>2,388</td><td>2:41</td><td>6.7%</td></tr>
+        </table>
+        <p class="note">실서비스 전환 시 Google Analytics 4를 연동하면 이 화면의 모든 수치가 실데이터로 대체됩니다. GA4 삽입은 스크립트 한 줄이며, 연동 작업은 Claude에게 요청하면 됩니다.</p>
+      </div>
+    </div>
+
+    <!-- ── TAB: MEMBERS ── -->
+    <div class="tab" id="tab-members">
+      <div class="panel">
+        <h2>회원 목록 <button class="btn ghost sm" onclick="renderMembers()">새로고침</button></h2>
+        <table id="tblMembers">
+          <tr><th>No</th><th>가입 경로</th><th>가입일</th><th>언어</th><th>상태</th></tr>
+        </table>
+        <p class="note">사이트의 "로그인 · 가입" 버튼으로 데모 가입을 하면 이 목록에 즉시 나타납니다(브라우저 저장). 실서비스에서는 Supabase 연동으로 카카오·구글 실계정 가입이 이 자리에 표시됩니다.</p>
+      </div>
+    </div>
+
+    <!-- ── TAB: HOTELS ── -->
+    <div class="tab" id="tab-hotels">
+      <div class="panel">
+        <h2>지점 목록</h2>
+        <table id="tblHotels"><tr><th>브랜드</th><th>지점명</th><th>지역</th><th>노출</th><th></th></tr></table>
+        <div class="formrow">
+          <select id="hBrand"><option>UH SUITE</option><option>UH FLAT</option><option>UH CONTINENTAL</option><option>DANDELION</option><option>STONE HOUSE</option></select>
+          <input id="hName" placeholder="지점명 (예: THE PANGYO)">
+          <input id="hArea" placeholder="지역 (예: 성남 판교)">
+          <select id="hShow"><option value="1">노출</option><option value="0">숨김</option></select>
+          <button class="btn" onclick="addHotel()">지점 추가</button>
+        </div>
+        <p class="note">여기서 추가·숨김한 지점은 데모 저장소(브라우저)에 기록됩니다. 실서비스에서는 이 관리 화면에서 추가하면 사이트 지점 목록이 자동 갱신되도록 DB 연동합니다.</p>
+      </div>
+    </div>
+
+    <!-- ── TAB: EVENTS ── -->
+    <div class="tab" id="tab-events">
+      <div class="panel">
+        <h2>이벤트 · 배너</h2>
+        <table id="tblEvents"><tr><th>제목</th><th>기간</th><th>노출 위치</th><th>상태</th><th></th></tr></table>
+        <div class="formrow">
+          <input id="eTitle" placeholder="이벤트명 (예: 여름 얼리버드 20%)">
+          <input id="eStart" type="date">
+          <input id="eEnd" type="date">
+          <select id="ePos"><option>메인 히어로</option><option>브랜드 페이지</option><option>팝업</option></select>
+          <button class="btn" onclick="addEvent()">이벤트 등록</button>
+        </div>
+        <p class="note">종료일이 지난 이벤트는 자동으로 '종료' 상태로 표시됩니다.</p>
+      </div>
+    </div>
+
+    <!-- ── TAB: IMAGES ── -->
+    <div class="tab" id="tab-images">
+      <div class="panel">
+        <h2>이미지 교체</h2>
+        <table>
+          <tr><th>위치</th><th>현재 이미지</th><th>교체</th></tr>
+          <tr><td>메인 히어로</td><td style="color:var(--dim)">unsplash (플레이스홀더)</td><td><button class="btn ghost sm" onclick="alert('실서비스 연동 시: 파일 업로드 → 자동 반영')">파일 선택</button></td></tr>
+          <tr><td>브랜드 카드 × 5</td><td style="color:var(--dim)">unsplash (플레이스홀더)</td><td><button class="btn ghost sm" onclick="alert('실서비스 연동 시: 파일 업로드 → 자동 반영')">파일 선택</button></td></tr>
+          <tr><td>CTA 배경</td><td style="color:var(--dim)">unsplash (플레이스홀더)</td><td><button class="btn ghost sm" onclick="alert('실서비스 연동 시: 파일 업로드 → 자동 반영')">파일 선택</button></td></tr>
+        </table>
+        <p class="note">시안 단계에서는 수정가이드의 방법(파일 교체)으로 이미지를 바꿉니다. 실서비스 전환 시 이 화면에서 업로드하면 사이트에 자동 반영되도록 스토리지를 연동합니다.</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+/* ── 로그인 (데모) ── */
+function tryLogin(){
+  const id = document.getElementById('gid').value.trim();
+  const pw = document.getElementById('gpw').value;
+  if(id==='admin' && pw==='uhc2026'){
+    sessionStorage.setItem('uhc_admin','1');
+    enter();
+  } else {
+    document.getElementById('gerr').style.display='block';
+  }
+}
+function enter(){
+  document.getElementById('gate').style.display='none';
+  document.getElementById('shell').classList.add('on');
+  initCharts(); renderMembers(); renderHotels(); renderEvents();
+}
+function logout(){ sessionStorage.removeItem('uhc_admin'); location.reload(); }
+if(sessionStorage.getItem('uhc_admin')==='1'){ window.addEventListener('DOMContentLoaded', enter); }
+document.getElementById('gpw').addEventListener('keydown',e=>{ if(e.key==='Enter') tryLogin(); });
+
+/* ── 탭 ── */
+document.querySelectorAll('.menu button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.menu button').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  document.getElementById('tab-'+b.dataset.tab).classList.add('on');
+  document.getElementById('tabTitle').textContent = b.textContent;
+}));
+
+/* ── 차트 (샘플 데이터) ── */
+let chartsInit=false;
+function initCharts(){
+  if(chartsInit || typeof Chart==='undefined') return; chartsInit=true;
+  Chart.defaults.color='#8c867a'; Chart.defaults.borderColor='#2e2a22'; Chart.defaults.font.family="'Pretendard Variable','Pretendard',sans-serif";
+  new Chart(document.getElementById('chTraffic'),{type:'line',data:{
+    labels:['월','화','수','목','금','토','일'],
+    datasets:[
+      {label:'방문자',data:[980,1120,1050,1284,1490,2100,1860],borderColor:'#a8894f',backgroundColor:'rgba(168,137,79,.12)',fill:true,tension:.4},
+      {label:'예약 클릭',data:[70,84,79,96,128,204,171],borderColor:'#7fae7a',tension:.4}
+    ]},options:{plugins:{legend:{labels:{boxWidth:10}}}}});
+  new Chart(document.getElementById('chGeo'),{type:'doughnut',data:{
+    labels:['한국','일본','중국·대만','동남아','기타'],
+    datasets:[{data:[34,26,22,12,6],backgroundColor:['#a8894f','#7fa8e8','#c47b6a','#7fae7a','#555046'],borderWidth:0}]},
+    options:{plugins:{legend:{position:'bottom',labels:{boxWidth:10}}},cutout:'62%'}});
+}
+
+/* ── 회원 (데모 가입 연동) ── */
+const seedMembers=[{provider:'kakao',joined:'2026-06-28',lang:'ko'},{provider:'google',joined:'2026-06-30',lang:'ja'},{provider:'kakao',joined:'2026-07-01',lang:'en'}];
+function renderMembers(){
+  const saved = JSON.parse(localStorage.getItem('uhc_members')||'[]');
+  const all = seedMembers.concat(saved);
+  document.getElementById('kpiMembers').textContent = all.length;
+  const t = document.getElementById('tblMembers');
+  t.innerHTML = '<tr><th>No</th><th>가입 경로</th><th>가입일</th><th>언어</th><th>상태</th></tr>' +
+    all.map((m,i)=>'<tr><td>'+(i+1)+'</td><td><span class="tag '+m.provider+'">'+m.provider.toUpperCase()+'</span></td><td>'+m.joined+'</td><td>'+(m.lang||'-').toUpperCase()+'</td><td><span class="tag on">활성</span></td></tr>').join('');
+}
+
+/* ── 지점 ── */
+const seedHotels=[
+  ['UH CONTINENTAL','CENTER POINT','부산 해운대',1],['UH CONTINENTAL','SEOUL CENTER','서울 명동',1],
+  ['UH SUITE','THE MYEONGDONG','서울 명동',1],['UH SUITE','THE COEX','서울 선릉',1],['UH SUITE','NAMBA STATION','오사카',1],
+  ['UH FLAT','THE SEOCHO','서울 서초',1],['UH FLAT','SIGNATURE GANGNAM','서울 강남',1],['UH FLAT','KUALA LUMPUR','말레이시아',1],
+  ['STONE HOUSE','SEOLLEUNG','서울 선릉',1]];
+function getHotels(){ return JSON.parse(localStorage.getItem('uhc_hotels') || JSON.stringify(seedHotels)); }
+function saveHotels(h){ localStorage.setItem('uhc_hotels', JSON.stringify(h)); renderHotels(); }
+function renderHotels(){
+  const h = getHotels();
+  document.getElementById('tblHotels').innerHTML = '<tr><th>브랜드</th><th>지점명</th><th>지역</th><th>노출</th><th></th></tr>' +
+    h.map((r,i)=>'<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td>'+
+      '<td><span class="tag '+(r[3]? 'on':'off')+'">'+(r[3]?'노출':'숨김')+'</span></td>'+
+      '<td><button class="btn ghost sm" onclick="toggleHotel('+i+')">'+(r[3]?'숨기기':'노출하기')+'</button></td></tr>').join('');
+}
+function toggleHotel(i){ const h=getHotels(); h[i][3]=h[i][3]?0:1; saveHotels(h); }
+function addHotel(){
+  const b=document.getElementById('hBrand').value, n=document.getElementById('hName').value.trim(), a=document.getElementById('hArea').value.trim(), s=+document.getElementById('hShow').value;
+  if(!n||!a){ alert('지점명과 지역을 입력해줘요.'); return; }
+  const h=getHotels(); h.push([b,n,a,s]); saveHotels(h);
+  document.getElementById('hName').value=''; document.getElementById('hArea').value='';
+}
+
+/* ── 이벤트 ── */
+const seedEvents=[['앱 출시 기념 전 호텔 10%','2026-03-18','2026-07-31','메인 히어로'],['아고다 골드서클 기념전','2026-05-01','2026-06-30','브랜드 페이지']];
+function getEvents(){ return JSON.parse(localStorage.getItem('uhc_events') || JSON.stringify(seedEvents)); }
+function renderEvents(){
+  const today = new Date().toISOString().slice(0,10);
+  document.getElementById('tblEvents').innerHTML = '<tr><th>제목</th><th>기간</th><th>노출 위치</th><th>상태</th><th></th></tr>' +
+    getEvents().map((e,i)=>'<tr><td>'+e[0]+'</td><td>'+e[1]+' ~ '+e[2]+'</td><td>'+e[3]+'</td>'+
+      '<td><span class="tag '+(e[2]>=today?'on':'off')+'">'+(e[2]>=today?'진행 중':'종료')+'</span></td>'+
+      '<td><button class="btn ghost sm" onclick="delEvent('+i+')">삭제</button></td></tr>').join('');
+}
+function addEvent(){
+  const t=document.getElementById('eTitle').value.trim(), s=document.getElementById('eStart').value, e=document.getElementById('eEnd').value, p=document.getElementById('ePos').value;
+  if(!t||!s||!e){ alert('제목과 기간을 입력해줘요.'); return; }
+  const ev=getEvents(); ev.push([t,s,e,p]); localStorage.setItem('uhc_events', JSON.stringify(ev)); renderEvents();
+  document.getElementById('eTitle').value='';
+}
+function delEvent(i){ if(!confirm('이 이벤트를 삭제할까요?')) return; const ev=getEvents(); ev.splice(i,1); localStorage.setItem('uhc_events', JSON.stringify(ev)); renderEvents(); }
+</script>
+</body>
+</html>

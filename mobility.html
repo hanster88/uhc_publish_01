@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>UHC MOBILITY | UHC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+KR:wght@300;400;600&family=Noto+Serif+JP:wght@300;400&family=Noto+Serif+SC:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css?v=9">
+<style>
+  .mob-form{max-width:860px;margin:56px auto 0;background:#fff;border:1px solid var(--line);padding:44px}
+  .mob-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .mfield{display:flex;flex-direction:column;gap:7px}
+  .mfield.full{grid-column:1/-1}
+  .mfield label{font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--amber);font-weight:400}
+  .mfield input,.mfield select{padding:13px 14px;border:1px solid var(--line);background:var(--bone);
+    font-family:var(--sans);font-size:14px;font-weight:300;color:var(--ink)}
+  .mfield input:focus,.mfield select:focus{outline:none;border-color:var(--amber)}
+  .mob-submit{margin-top:26px;width:100%;padding:17px;background:var(--ink);color:#fff;border:none;cursor:pointer;
+    font-family:var(--sans);font-size:12px;letter-spacing:.26em;text-transform:uppercase;transition:background .3s;font-weight:400}
+  .mob-submit:hover{background:var(--amber)}
+  .mob-note{margin-top:18px;text-align:center;font-size:11.5px;color:var(--grey);line-height:1.9}
+  @media(max-width:700px){.mob-grid{grid-template-columns:1fr}.mob-form{padding:26px}}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <button class="menu-btn" id="menuBtn" aria-label="메뉴"><span></span><span></span></button>
+  <a class="logo" href="index.html">UHC<small>HOTELS &amp; STAYS</small></a>
+  <div class="hdr-right">
+    <div class="lang">
+      <button data-lang="ko">KR</button><button data-lang="en">EN</button><button data-lang="ja">JP</button><button data-lang="zh">CN</button>
+    </div>
+    <button class="btn-user" data-auth-open data-i18n="u_login">로그인</button>
+    <button class="btn-user" data-auth-open data-i18n="u_join">회원가입</button>
+    <a class="btn-book" href="https://web.stationbyuhc.com/kr/search?from=home" target="_blank" rel="noopener" data-i18n="book">객실 예약</a>
+  </div>
+</header>
+
+<div class="mega" id="mega">
+  <button class="mega-close" id="megaClose" aria-label="메뉴 닫기">✕</button>
+  <div class="mega-inner">
+    <div>
+      <h5 data-i18n="mm_brands">브랜드</h5>
+      <a href="continental.html">UH CONTINENTAL<small>High-end Hotel</small></a>
+      <a href="suite.html">UH SUITE<small>Flagship City Stay</small></a>
+      <a href="flat.html">UH FLAT<small>Residence Hotel</small></a>
+      <a href="dandelion.html">DANDELION<small>Lifestyle Stay</small></a>
+    </div>
+    <div>
+      <h5 data-i18n="mm_beauty">뷰티</h5>
+      <a href="https://uhcell.com/" target="_blank" rel="noopener">UH CELL<small data-i18n="m_cell">메디컬</small></a>
+      <a href="https://www.medicalbloom-coex.kr/" target="_blank" rel="noopener">MEDICAL BLOOM<small data-i18n="m_bloom">메디컬 블룸</small></a>
+      <a href="https://www.renine.kr/" target="_blank" rel="noopener">RE:NINE<small data-i18n="m_renine">피부과 의원</small></a>
+      <a href="stonehouse.html">STONE HOUSE<small data-i18n="m_stone">헤드스파</small></a>
+    </div>
+    <div>
+      <h5 data-i18n="mm_dine">다이닝 · 쇼핑</h5>
+      <a href="fnb.html"><span data-i18n="u_dining">다이닝 소개·예약</span><small>UHC F&amp;B</small></a>
+      <a href="fnb.html">ETONNER<small data-i18n="fb_soon">상세 소개 준비 중</small></a>
+      <a href="fnb.html">MUWOL<small data-i18n="fb_soon">상세 소개 준비 중</small></a>
+      <a href="fnb.html">BAR OHU<small data-i18n="fb_soon">상세 소개 준비 중</small></a>
+      <a href="fnb.html">SOUNDS OF APPLE<small data-i18n="fb_soon">상세 소개 준비 중</small></a>
+      <a href="https://hanster88.github.io/deordinaire_Test_02/" target="_blank" rel="noopener">E-SHOP ↗<small>De-Ordinaire</small></a>
+    </div>
+    <div>
+      <h5 data-i18n="mm_service">서비스</h5>
+      <a href="https://www.uhc-global.com/" target="_blank" rel="noopener">UHC GROUP ↗<small data-i18n="u_hq">본사 홈페이지</small></a>
+      <a href="https://web.stationbyuhc.com/kr/search?from=home" target="_blank" rel="noopener"><span data-i18n="book">객실 예약</span><small>Station by UHC</small></a>
+      <a href="mobility.html"><span data-i18n="u_mobility">차량·의전 예약</span><small>UHC Mobility</small></a>
+      <a href="membership.html"><span data-i18n="u_membership">멤버십</span><small>CLUB UHC</small></a>
+      <a href="https://forms.gle/GoKn4aTBbEc3YeGUA" target="_blank" rel="noopener"><span data-i18n="u_partner">제휴·협업 문의</span><small>Proposal</small></a>
+      <a href="admin.html"><span data-i18n="f_admin">관리자</span><small>Admin Console</small></a>
+    </div>
+  </div>
+  <div class="mega-foot"><span>Urban Host Company</span><span>Seoul · Busan · Osaka · Kuala Lumpur</span></div>
+</div>
+
+<div class="quickbar">
+  <a class="q-book" href="https://web.stationbyuhc.com/kr/search?from=home" target="_blank" rel="noopener" data-i18n="book">객실 예약</a>
+  <a href="mobility.html" data-i18n="u_mobility">차량·의전 예약</a>
+  <a href="fnb.html" data-i18n="u_dining">다이닝</a>
+  <a href="https://hanster88.github.io/deordinaire_Test_02/" target="_blank" rel="noopener">E-SHOP</a>
+</div>
+
+<div class="page-hero">
+  <div class="bg"><img src="assets/img/mobility/mobility-01.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=2200&q=80'" alt="UHC Mobility"></div>
+  <div class="inner">
+    <p class="eyebrow">UHC SERVICE — MOBILITY</p>
+    <h1>UHC <em>Mobility</em></h1>
+    <p class="tagline" data-i18n="hero_tag">Premium Mobility, Extended Hospitality. — 숙박과 이동을 하나의 경험으로 연결합니다.</p>
+    <div class="hero-rule"></div>
+    <a class="hero-book" href="#book" data-i18n="hero_cta">차량 · 의전 예약</a>
+  </div>
+</div>
+
+<section>
+  <div class="wrap split">
+    <div class="reveal">
+      <p class="label">With PAPA Mobility</p>
+      <h2 class="display" data-i18n="intro_title">여정의 처음과 끝을<br><em>책임지는 이동</em></h2>
+      <p class="lead" style="margin-top:26px" data-i18n="intro_lead">UHC는 프리미엄 모빌리티 파파모빌리티와 함께 공항에서 호텔까지, 호텔에서 도시 곳곳까지 끊김 없는 여정을 만듭니다. 체크인 전 픽업부터 비즈니스 의전, 룸 인 모션까지 — 이동 자체가 환대의 일부가 됩니다.</p>
+    </div>
+    <div class="img-tall reveal d1"><img src="assets/img/mobility/mobility-02.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80'" alt=""></div>
+  </div>
+</section>
+
+<section style="background:var(--sand)">
+  <div class="wrap">
+    <p class="label reveal">Services</p>
+    <h2 class="display reveal" data-i18n="sv_title">모빌리티 서비스</h2>
+    <div class="features">
+      <div class="feature reveal"><p class="fno">01</p><h4 data-i18n="f1t">공항 미팅 &amp; 픽업</h4><p data-i18n="f1d">인천·김포·김해 공항에서 호텔까지. 항공편 지연에도 대기합니다.</p></div>
+      <div class="feature reveal d1"><p class="fno">02</p><h4 data-i18n="f2t">의전 · 비즈니스</h4><p data-i18n="f2d">프리미엄 차량과 전문 드라이버의 격식 있는 의전 서비스.</p></div>
+      <div class="feature reveal d2"><p class="fno">03</p><h4 data-i18n="f3t">UHC ROOM IN MOTION</h4><p data-i18n="f3d">숙박과 이동이 결합된 UHC만의 시그니처 모빌리티 경험.</p></div>
+      <div class="feature reveal d3"><p class="fno">04</p><h4 data-i18n="f4t">시간 대절</h4><p data-i18n="f4d">도시 투어, 출장 일정 등 시간 단위 맞춤 운행.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="book">
+  <div class="wrap">
+    <p class="label reveal">Reservation</p>
+    <h2 class="display reveal" data-i18n="bk_title">차량 · 의전 <em>예약</em></h2>
+    <form class="mob-form reveal d1" id="mobForm">
+      <div class="mob-grid">
+        <div class="mfield"><label data-i18n="bk_name">성함</label><input type="text" id="mName" required></div>
+        <div class="mfield"><label data-i18n="bk_phone">연락처</label><input type="tel" id="mPhone" placeholder="010-0000-0000" required></div>
+        <div class="mfield"><label data-i18n="bk_type">서비스 유형</label>
+          <select id="mType">
+            <option data-i18n="bk_t1">공항 미팅 · 픽업</option>
+            <option data-i18n="bk_t2">의전 · 비즈니스</option>
+            <option data-i18n="bk_t3">룸 인 모션</option>
+            <option data-i18n="bk_t4">시간 대절</option>
+          </select>
+        </div>
+        <div class="mfield"><label data-i18n="bk_when">일시</label><input type="datetime-local" id="mWhen" required></div>
+        <div class="mfield"><label data-i18n="bk_from">출발지</label><input type="text" id="mFrom" placeholder="예: 인천공항 T2" required></div>
+        <div class="mfield"><label data-i18n="bk_to">도착지</label><input type="text" id="mTo" placeholder="예: UH 스위트 더 코엑스" required></div>
+        <div class="mfield full"><label data-i18n="bk_memo">요청사항 (선택)</label><input type="text" id="mMemo"></div>
+      </div>
+      <button class="mob-submit" type="submit" data-i18n="bk_submit">예약 요청하기</button>
+      <p class="mob-note" data-i18n="bk_note">시안 데모 — 예약 요청은 브라우저에 임시 저장됩니다. 실서비스 전환 시 파파모빌리티 시스템과 연동됩니다.<br>즉시 배차는 파파모빌리티 앱에서 가능합니다.</p>
+      <div style="text-align:center;margin-top:20px">
+        <a class="ch-more" style="color:var(--ink)" href="https://app.papamobility.com/" target="_blank" rel="noopener">PAPA MOBILITY APP ↗</a>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="bg"><img src="assets/img/mobility/mobility-03.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=2000&q=80'" alt=""></div>
+  <div class="wrap">
+    <h2 data-i18n="cta_title">도착하는 순간부터,<br><em>UHC의 환대가 시작됩니다.</em></h2>
+    <div class="cta-btns">
+      <a class="btn-solid" href="https://web.stationbyuhc.com/kr/search?from=home" target="_blank" rel="noopener" data-i18n="book">객실 예약</a>
+      <button class="btn-line" data-auth-open data-i18n="u_join">회원가입</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <p class="logo serif">UHC</p>
+      <p data-i18n="f_info">주식회사 유에이치씨</p>
+    </div>
+    <div>
+      <h5 data-i18n="f_brands">브랜드</h5>
+      <a href="continental.html">UH Continental</a>
+      <a href="suite.html">UH Suite</a>
+      <a href="flat.html">UH Flat</a>
+      <a href="dandelion.html">Dandelion</a>
+    </div>
+    <div>
+      <h5 data-i18n="f_amenity">뷰티 &amp; 라이프스타일</h5>
+      <a href="https://uhcell.com/" target="_blank" rel="noopener">UH Cell</a>
+      <a href="https://www.medicalbloom-coex.kr/" target="_blank" rel="noopener">Medical Bloom</a>
+      <a href="https://www.renine.kr/" target="_blank" rel="noopener">Re:Nine</a>
+      <a href="stonehouse.html">Stone House</a>
+      <a href="fnb.html">F&amp;B</a>
+      <a href="https://hanster88.github.io/deordinaire_Test_02/" target="_blank" rel="noopener">De-Ordinaire ↗</a>
+    </div>
+    <div>
+      <h5 data-i18n="f_service">서비스</h5>
+      <a href="https://web.stationbyuhc.com" target="_blank" rel="noopener" data-i18n="f_booking">통합 예약</a>
+      <a href="mobility.html" data-i18n="u_mobility">차량·의전 예약</a>
+      <a href="membership.html" data-i18n="u_membership">멤버십</a>
+      <a href="https://link.stationbyuhc.com/zbokav" target="_blank" rel="noopener" data-i18n="f_app">공식 앱</a>
+      <a href="https://forms.gle/GoKn4aTBbEc3YeGUA" target="_blank" rel="noopener" data-i18n="f_proposal">제휴·협업 문의</a>
+      <a href="admin.html" data-i18n="f_admin">관리자</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span data-i18n="f_copy">© 2026 UHC, Ltd. All rights reserved.</span>
+    <span>www.uhc-global.com</span>
+  </div>
+</footer>
+
+<div class="modal-mask" id="authMask">
+  <div class="auth-modal">
+    <button class="x">✕</button>
+    <h3 class="serif" data-i18n="au_title">UHC 멤버십</h3>
+    <p class="sub" data-i18n="au_sub">가입하고 전 브랜드 혜택을 받아보세요.</p>
+    <button class="sso kakao" data-sso="kakao"><svg class="ico" viewBox="0 0 24 24" fill="#191919"><path d="M12 3C6.48 3 2 6.54 2 10.9c0 2.8 1.86 5.26 4.66 6.65l-.95 3.51c-.08.31.27.56.54.38l4.19-2.77c.51.05 1.03.08 1.56.08 5.52 0 10-3.54 10-7.85S17.52 3 12 3z"/></svg><span data-i18n="au_kakao">카카오로 계속하기</span></button>
+    <button class="sso" data-sso="google"><svg class="ico" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg><span data-i18n="au_google">Google로 계속하기</span></button>
+    <button class="sso" data-sso="email"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span data-i18n="au_email">이메일로 계속하기</span></button>
+    <p class="auth-note" data-i18n="au_note">가입 시 이용약관 및 개인정보처리방침에 동의하게 됩니다.</p>
+    <span class="demo-badge" data-i18n="au_demo">시안 데모 — 실서비스 연동 전</span>
+  </div>
+</div>
+
+<script>
+window.PAGE_I18N = {
+  ko:{
+    hero_tag:"Premium Mobility, Extended Hospitality. — 숙박과 이동을 하나의 경험으로 연결합니다.",
+    hero_cta:"차량 · 의전 예약",
+    intro_title:"여정의 처음과 끝을<br><em>책임지는 이동</em>",
+    intro_lead:"UHC는 프리미엄 모빌리티 파파모빌리티와 함께 공항에서 호텔까지, 호텔에서 도시 곳곳까지 끊김 없는 여정을 만듭니다. 체크인 전 픽업부터 비즈니스 의전, 룸 인 모션까지 — 이동 자체가 환대의 일부가 됩니다.",
+    sv_title:"모빌리티 서비스",
+    f1t:"공항 미팅 & 픽업", f1d:"인천·김포·김해 공항에서 호텔까지. 항공편 지연에도 대기합니다.",
+    f2t:"의전 · 비즈니스", f2d:"프리미엄 차량과 전문 드라이버의 격식 있는 의전 서비스.",
+    f3t:"UHC ROOM IN MOTION", f3d:"숙박과 이동이 결합된 UHC만의 시그니처 모빌리티 경험.",
+    f4t:"시간 대절", f4d:"도시 투어, 출장 일정 등 시간 단위 맞춤 운행.",
+    bk_title:"차량 · 의전 <em>예약</em>",
+    bk_name:"성함", bk_phone:"연락처", bk_type:"서비스 유형", bk_when:"일시", bk_from:"출발지", bk_to:"도착지", bk_memo:"요청사항 (선택)",
+    bk_t1:"공항 미팅 · 픽업", bk_t2:"의전 · 비즈니스", bk_t3:"룸 인 모션", bk_t4:"시간 대절",
+    bk_submit:"예약 요청하기",
+    bk_note:"시안 데모 — 예약 요청은 브라우저에 임시 저장됩니다. 실서비스 전환 시 파파모빌리티 시스템과 연동됩니다.<br>즉시 배차는 파파모빌리티 앱에서 가능합니다.",
+    bk_done:"예약 요청이 접수되었습니다. (데모 — 브라우저 저장)",
+    cta_title:"도착하는 순간부터,<br><em>UHC의 환대가 시작됩니다.</em>"
+  },
+  en:{
+    hero_tag:"Premium Mobility, Extended Hospitality. — Connecting stay and travel into one experience.",
+    hero_cta:"Vehicle · Chauffeur Booking",
+    intro_title:"Travel that carries you<br><em>from start to finish</em>",
+    intro_lead:"Together with premium mobility partner PAPA Mobility, UHC creates a seamless journey — airport to hotel, hotel to everywhere in the city. From pre-check-in pick-up to business protocol service and Room in Motion, the ride itself becomes part of the hospitality.",
+    sv_title:"Mobility Services",
+    f1t:"Airport Meet & Pick-up", f1d:"From Incheon, Gimpo and Gimhae airports to your hotel. We wait through flight delays.",
+    f2t:"Protocol · Business", f2d:"Formal chauffeur service with premium vehicles and professional drivers.",
+    f3t:"UHC ROOM IN MOTION", f3d:"UHC's signature mobility experience combining stay and travel.",
+    f4t:"Hourly Charter", f4d:"Custom hourly service for city tours and business schedules.",
+    bk_title:"Vehicle · Chauffeur <em>Booking</em>",
+    bk_name:"Name", bk_phone:"Phone", bk_type:"Service Type", bk_when:"Date & Time", bk_from:"Pick-up", bk_to:"Drop-off", bk_memo:"Requests (optional)",
+    bk_t1:"Airport Meet · Pick-up", bk_t2:"Protocol · Business", bk_t3:"Room in Motion", bk_t4:"Hourly Charter",
+    bk_submit:"Request Booking",
+    bk_note:"Prototype demo — requests are stored locally in your browser. Will be integrated with the PAPA Mobility system in production.<br>For immediate dispatch, use the PAPA Mobility app.",
+    bk_done:"Your booking request has been received. (Demo — stored in browser)",
+    cta_title:"From the moment you arrive,<br><em>UHC's hospitality begins.</em>"
+  },
+  ja:{
+    hero_tag:"Premium Mobility, Extended Hospitality. — 宿泊と移動をひとつの体験としてつなぎます。",
+    hero_cta:"車両 · 送迎予約",
+    intro_title:"旅の始まりと終わりを<br><em>担う移動</em>",
+    intro_lead:"UHCはプレミアムモビリティのパパモビリティとともに、空港からホテルへ、ホテルから街のすみずみへ、途切れのない旅をつくります。チェックイン前の送迎からビジネス儀典、ルーム・イン・モーションまで — 移動そのものがおもてなしの一部になります。",
+    sv_title:"モビリティサービス",
+    f1t:"空港ミート＆ピックアップ", f1d:"仁川·金浦·金海空港からホテルまで。フライト遅延時も待機します。",
+    f2t:"儀典 · ビジネス", f2d:"プレミアム車両とプロドライバーによる格式ある儀典サービス。",
+    f3t:"UHC ROOM IN MOTION", f3d:"宿泊と移動が融合したUHCのシグネチャーモビリティ体験。",
+    f4t:"時間貸切", f4d:"シティツアーや出張日程など、時間単位のオーダーメイド運行。",
+    bk_title:"車両 · 送迎<em>予約</em>",
+    bk_name:"お名前", bk_phone:"連絡先", bk_type:"サービス種別", bk_when:"日時", bk_from:"出発地", bk_to:"到着地", bk_memo:"ご要望（任意）",
+    bk_t1:"空港ミート · ピックアップ", bk_t2:"儀典 · ビジネス", bk_t3:"ルーム・イン・モーション", bk_t4:"時間貸切",
+    bk_submit:"予約をリクエスト",
+    bk_note:"デモ版 — リクエストはブラウザに一時保存されます。本サービスではパパモビリティのシステムと連携します。<br>即時配車はパパモビリティアプリをご利用ください。",
+    bk_done:"予約リクエストを受け付けました。（デモ — ブラウザ保存）",
+    cta_title:"ご到着の瞬間から、<br><em>UHCのおもてなしが始まります。</em>"
+  },
+  zh:{
+    hero_tag:"Premium Mobility, Extended Hospitality. — 把住宿与出行连成一体的体验。",
+    hero_cta:"车辆 · 礼宾预订",
+    intro_title:"贯穿旅程始终的<br><em>出行服务</em>",
+    intro_lead:"UHC与高端出行伙伴PAPA Mobility携手，打造从机场到酒店、从酒店到城市各处的无缝旅程。从入住前接机到商务礼宾、Room in Motion，出行本身就是待客之道的一部分。",
+    sv_title:"出行服务",
+    f1t:"机场接机服务", f1d:"从仁川、金浦、金海机场直达酒店。航班延误也会等候。",
+    f2t:"礼宾 · 商务", f2d:"高端车辆与专业司机的正式礼宾服务。",
+    f3t:"UHC ROOM IN MOTION", f3d:"融合住宿与出行的UHC招牌出行体验。",
+    f4t:"包时租车", f4d:"城市观光、商务行程等按小时定制的出行服务。",
+    bk_title:"车辆 · 礼宾<em>预订</em>",
+    bk_name:"姓名", bk_phone:"联系方式", bk_type:"服务类型", bk_when:"日期时间", bk_from:"出发地", bk_to:"目的地", bk_memo:"其他要求（选填）",
+    bk_t1:"机场接机", bk_t2:"礼宾 · 商务", bk_t3:"Room in Motion", bk_t4:"包时租车",
+    bk_submit:"提交预订申请",
+    bk_note:"设计稿演示 — 申请暂存于浏览器。正式上线后将与PAPA Mobility系统对接。<br>如需即时叫车，请使用PAPA Mobility App。",
+    bk_done:"预订申请已收到。（演示 — 保存于浏览器）",
+    cta_title:"从抵达的那一刻起，<br><em>UHC的款待即刻开始。</em>"
+  }
+};
+</script>
+<script>
+document.getElementById('mobForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const r={
+    name:document.getElementById('mName').value,
+    phone:document.getElementById('mPhone').value,
+    type:document.getElementById('mType').value,
+    when:document.getElementById('mWhen').value,
+    from:document.getElementById('mFrom').value,
+    to:document.getElementById('mTo').value,
+    memo:document.getElementById('mMemo').value,
+    requested:new Date().toISOString().slice(0,16)
+  };
+  const list=JSON.parse(localStorage.getItem('uhc_mobility')||'[]');
+  list.push(r); localStorage.setItem('uhc_mobility', JSON.stringify(list));
+  const dict=(window.PAGE_I18N[window.UHC_LANG||'ko']||window.PAGE_I18N.ko);
+  alert(dict.bk_done);
+  this.reset();
+});
+</script>
+<script src="assets/common.js?v=9"></script>
+</body>
+</html>

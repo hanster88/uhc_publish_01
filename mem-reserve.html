@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>CLUB UHC RESERVE | UHC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+KR:wght@300;400;600&family=Noto+Serif+JP:wght@300;400&family=Noto+Serif+SC:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css?v=10">
+<style>
+  body{background:#111009}
+  /* ── 실물 멤버십 카드 비주얼 ── */
+  .mcard{position:relative;aspect-ratio:1.586;border-radius:18px;overflow:hidden;
+    box-shadow:0 24px 60px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.14);
+    transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s;will-change:transform}
+  .mcard::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.09) 50%,transparent 58%)}
+  .mcard .art{position:absolute;inset:0;padding:7% 8%;display:flex;flex-direction:column;justify-content:space-between;color:#efe9df}
+  .mcard .top{display:flex;justify-content:space-between;align-items:flex-start}
+  .mcard .lg{font-family:var(--serif);font-size:clamp(15px,1.5vw,20px);letter-spacing:.32em;font-weight:600}
+  .mcard .club{font-size:clamp(8px,.8vw,10px);letter-spacing:.4em;text-transform:uppercase;opacity:.6}
+  .mcard .chip{width:13%;aspect-ratio:1.3;border-radius:14%;
+    background:linear-gradient(135deg,#d9c08a,#a8894f 60%,#8a6c39);box-shadow:inset 0 1px 2px rgba(255,255,255,.5)}
+  .mcard .bt .tn{font-family:var(--serif);font-size:clamp(16px,1.8vw,24px);letter-spacing:.26em;font-weight:400}
+  .mcard .bt .ms{font-size:clamp(7.5px,.75vw,9.5px);letter-spacing:.3em;text-transform:uppercase;opacity:.5;margin-top:6px}
+  .mcard.essential{background:linear-gradient(135deg,#4a4034 0%,#2b241d 55%,#191512 100%);border:1px solid rgba(217,192,138,.28)}
+  .mcard.signature{background:linear-gradient(135deg,#9a6630 0%,#5e3a1a 55%,#301d0e 100%);border:1px solid rgba(255,205,150,.34)}
+  .mcard.reserve{background:linear-gradient(135deg,#57493b 0%,#2c241c 50%,#14100c 100%);border:1px solid rgba(205,187,168,.3)}
+  .mcard.noir{background:linear-gradient(140deg,#111 0%,#000 60%,#1c1914 100%);border:1px solid rgba(255,255,255,.22)}
+  .mcard.noir .lg,.mcard.noir .bt .tn{color:#fff}
+  .mcard .mimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:3}
+  
+  .det-hero{position:relative;min-height:88vh;display:flex;align-items:center;overflow:hidden;color:#fff;padding:120px 26px 70px}
+  .det-hero .bg{position:absolute;inset:0}
+  .det-hero .bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.32) saturate(.9)}
+  .det-inner{position:relative;z-index:2;max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;width:100%;perspective:1600px}
+  .det-info .eyebrow{font-size:11px;letter-spacing:.46em;text-transform:uppercase;color:var(--clay);margin-bottom:16px}
+  .det-info h1{font-family:var(--serif);font-size:clamp(40px,5.6vw,64px);font-weight:400;letter-spacing:.16em}
+  .det-info .pr{font-family:var(--serif);font-size:clamp(24px,2.6vw,32px);color:var(--amber);margin-top:20px}
+  .det-info .pr small{font-size:12px;color:rgba(255,255,255,.45);font-family:var(--sans)}
+  .det-info .sm{margin-top:22px;font-size:14.5px;color:rgba(255,255,255,.7);line-height:2;font-weight:300;max-width:480px;word-break:keep-all}
+  .det-info .cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
+  .det-wrap{max-width:900px;margin:0 auto;padding:100px 26px}
+  .bene{margin-top:56px;border-top:1px solid rgba(255,255,255,.14)}
+  .bene li{display:flex;gap:26px;align-items:baseline;padding:22px 6px;border-bottom:1px solid rgba(255,255,255,.09);
+    font-size:15px;color:rgba(239,233,223,.85);font-weight:300;line-height:1.8}
+  .bene li b{font-family:var(--serif);color:var(--amber);font-weight:400;font-size:14px;min-width:34px}
+  .other{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:60px}
+  .other a{display:block;text-align:center;padding:20px 12px;border:1px solid rgba(255,255,255,.16);border-radius:16px;
+    color:rgba(239,233,223,.7);font-family:var(--serif);letter-spacing:.18em;font-size:15px;transition:all .3s}
+  .other a:hover{border-color:var(--amber);color:var(--amber)}
+  .consult{max-width:720px;margin:80px auto 0;padding:52px 46px;border-radius:var(--r-lg);color:#fff}
+  .consult h3{font-family:var(--serif);font-size:24px;font-weight:400;text-align:center;letter-spacing:.08em}
+  .consult .csub{text-align:center;font-size:12.5px;color:rgba(255,255,255,.55);margin:12px 0 30px;font-weight:300}
+  .c-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .c-field{display:flex;flex-direction:column;gap:7px}
+  .c-field.full{grid-column:1/-1}
+  .c-field label{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--clay)}
+  .c-field input,.c-field select{padding:14px 18px;border-radius:14px;border:1px solid rgba(255,255,255,.22);
+    background:rgba(255,255,255,.08);color:#fff;font-family:var(--sans);font-size:14px;font-weight:300;outline:none}
+  .c-field input:focus{border-color:var(--amber)}
+  .c-agree{grid-column:1/-1;display:flex;gap:10px;align-items:flex-start;font-size:11.5px;color:rgba(255,255,255,.55);line-height:1.8}
+  .c-agree input{accent-color:var(--amber);margin-top:3px}
+  .c-submit{grid-column:1/-1;padding:16px;border-radius:999px;border:none;background:var(--amber);color:#fff;
+    font-family:var(--sans);font-size:12px;letter-spacing:.26em;text-transform:uppercase;cursor:pointer;transition:all .35s}
+  .c-submit:hover{background:#a96529}
+  .mem-terms{max-width:760px;margin:70px auto 0;font-size:11.5px;color:rgba(239,233,223,.38);line-height:2.1;font-weight:300;
+    border-top:1px solid rgba(255,255,255,.1);padding-top:24px;list-style:none}
+  .mem-label{font-size:11px;letter-spacing:.5em;text-indent:.5em;text-transform:uppercase;color:var(--amber);text-align:center}
+  .mem-title{font-family:var(--serif);font-size:clamp(26px,3.6vw,40px);font-weight:400;color:#efe9df;text-align:center;margin-top:14px;line-height:1.4}
+  @media(max-width:900px){.det-inner{grid-template-columns:1fr;gap:44px}.other{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<header id="hdr">
+  <button class="menu-btn" id="menuBtn" aria-label="메뉴"><span></span><span></span></button>
+  <a class="logo" href="index.html">UHC<small>HOTELS &amp; STAYS</small></a>
+  <div class="hdr-right">
+    <div class="lang">
+      <button data-lang="ko">KR</button><button data-lang="en">EN</button><button data-lang="ja">JP</button><button data-lang="zh">CN</button>
+    </div>
+    <button class="btn-user" data-auth-open data-i18n="u_login">로그인</button>
+    <button class="btn-user" data-auth-open data-i18n="u_join">회원가입</button>
+    <a class="btn-book" href="https://web.stationbyuhc.com/kr/search?from=home" target="_blank" rel="noopener" data-i18n="book">객실 예약</a>
+  </div>
+</header>
+
+<div class="mega" id="mega">
+  <button class="mega-close" id="megaClose" aria-label="메뉴 닫기">✕</button>
+  <div class="mega-inner">
+    <div>
+      <h5 data-i18n="mm_brands">브랜드</h5>
+      <a href="continental.html">UH CONTINENTAL<small>High-end Hotel</small></a>
+      <a href="suite.html">UH SUITE<small>Flagship City Stay</small></a>
+      <a href="flat.html">UH FLAT<small>Residence Hotel</small></a>
+      <a href="dandelion.html">DANDELION<small>Lifestyle Stay</small></a>
+    </div>
+    <div>
+      <h5 data-i18n="mm_beauty">뷰티</h5>
+      <a href="https://uhcell.com/" target="_blank" rel="noopener">UH CELL<small data-i18n="m_cell">메디컬</small></a>
+      <a href="https://www.medicalbloom-coex.kr/" target="_blank" rel="noopener">MEDICAL BLOOM<small data-i18n="m_bloom">메디컬 블룸</small></a>
+      <a href="https://www.renine.kr/" target="_blank" rel="noopener">RE:NINE<small data-i18n="m_renine">피부과 의원</small></a>
+      <a href="stonehouse.html">STONE HOUSE<small data-i18n="m_stone">헤드스파</small></a>
+    </div>
+    <div>
+      <h5 data-i18n="mm_dine">다이닝 · 쇼핑</h5>
+      <a href="fnb.html"><span data-i18n="u_dining">다이닝 소개·예약</span><small>UHC F&amp;B</small></a>
+      <a href="fnb.html">ETONNER<small data-i18n="fb_soon">상세 소개 준비 중</small></a>
+      <a href="fnb.html">MUWOL<small data-i18n="fb_soon">상세 소개 준비 중</small></a>
+      <a href="fnb.html">BAR OHU<small data-i18n="fb_soon">상세 소개 준비 중</small></a>
+      <a href="fnb.html">SOUNDS OF APPLE<small data-i18n="fb_soon">상세 소개 준비 중</small></a>
+      <a href="https://hanster88.github.io/deordinaire_Test_02/" target="_blank" rel="noopener">E-SHOP ↗<small>De-Ordinaire</small></a>
+    </div>
+    <div>
+      <h5 data-i18n="mm_service">서비스</h5>
+      <a href="https://www.uhc-global.com/" target="_blank" rel="noopener">UHC GROUP ↗<small data-i18n="u_hq">본사 홈페이지</small></a>
+      <a href="https://web.stationbyuhc.com/kr/search?from=home" target="_blank" rel="noopener"><span data-i18n="book">객실 예약</span><small>Station by UHC</small></a>
+      <a href="mobility.html"><span data-i18n="u_mobility">차량·의전 예약</span><small>UHC Mobility</small></a>
+      <a href="membership.html"><span data-i18n="u_membership">멤버십</span><small>CLUB UHC</small></a>
+      <a href="https://forms.gle/GoKn4aTBbEc3YeGUA" target="_blank" rel="noopener"><span data-i18n="u_partner">제휴·협업 문의</span><small>Proposal</small></a>
+      <a href="admin.html"><span data-i18n="f_admin">관리자</span><small>Admin Console</small></a>
+    </div>
+  </div>
+  <div class="mega-foot"><span>Urban Host Company</span><span>Seoul · Busan · Osaka · Kuala Lumpur</span></div>
+</div>
+
+<div class="quickbar">
+  <a class="q-book" href="https://web.stationbyuhc.com/kr/search?from=home" target="_blank" rel="noopener" data-i18n="book">객실 예약</a>
+  <a href="mobility.html" data-i18n="u_mobility">차량·의전 예약</a>
+  <a href="fnb.html" data-i18n="u_dining">다이닝</a>
+  <a href="https://hanster88.github.io/deordinaire_Test_02/" target="_blank" rel="noopener">E-SHOP</a>
+</div>
+
+<div class="det-hero">
+  <div class="bg"><img src="assets/img/membership/membership-01.jpg" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1s49jbPquaBCrrAC54vgET29HFawNuODA&sz=w2000'" alt=""></div>
+  <div class="det-inner">
+    <div><div class="mcard reserve" data-tilt><img class="mimg" src="assets/img/membership/card-reserve.jpg" alt="" onerror="this.style.display='none'"><div class="art"><div class="top"><span class="lg">UHC</span><span class="club">Club UHC</span></div><div class="chip"></div><div class="bt"><p class="tn">RESERVE</p><p class="ms">Member Since 2026 · Urban Host</p></div></div></div></div>
+    <div class="det-info">
+      <p class="eyebrow">Club UHC — Annual Membership</p>
+      <h1>RESERVE</h1>
+      <p class="pr">₩ 4,500,000 <small data-i18n="v_year">/ 연</small></p>
+      <p class="sm" data-i18n="sum">스위트룸 클래스의 숙박과 가족 공유 Sub Card. 뷰티와 의전이 일상이 되는 멤버십.</p>
+      <div class="cta">
+        <a class="btn-solid" href="#consult" data-i18n="v_consult">상담 신청</a>
+        <a class="btn-line" href="membership.html" data-i18n="ot_title">다른 클럽 보기</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="det-wrap">
+  <p class="mem-label">Benefits</p>
+  <h2 class="mem-title" data-i18n="bn_title">클럽 혜택 구성</h2>
+  <ul class="bene"><li><b>01</b><span data-i18n="b1">상시 객실 20% · F&B 20% 할인</span></li><li><b>02</b><span data-i18n="b2">무료 숙박권 5매 (스위트룸 클래스)</span></li><li><b>03</b><span data-i18n="b3">금액 할인권 130만원</span></li><li><b>04</b><span data-i18n="b4">뷰티 6회 + 클리닉 프로그램 20% 할인</span></li><li><b>05</b><span data-i18n="b5">와인 콜키지 프리 8매</span></li><li><b>06</b><span data-i18n="b6">모빌리티 의전 6회</span></li><li><b>07</b><span data-i18n="b7">E-SHOP 상품권 50만원</span></li><li><b>08</b><span data-i18n="b8">Sub Card 1매 (가족 공유)</span></li></ul>
+
+  <p class="mem-label" style="margin-top:80px" data-i18n="ot_title">다른 클럽 보기</p>
+  <div class="other"><a href="mem-essential.html">ESSENTIAL</a><a href="mem-signature.html">SIGNATURE</a><a href="mem-noir.html">NOIR</a></div>
+
+  <form class="consult glass" id="consultForm">
+    <h3 data-i18n="cs_title">멤버십 상담 신청</h3>
+    <p class="csub" data-i18n="cs_sub">회원관리팀이 운영시간(평일 09:00–17:30) 내 연락드립니다.</p>
+    <div class="c-grid">
+      <div class="c-field"><label data-i18n="cs_name">이름 (국문)</label><input type="text" id="cName" required></div>
+      <div class="c-field"><label data-i18n="cs_ename">이름 (영문)</label><input type="text" id="cEname"></div>
+      <div class="c-field full"><label data-i18n="cs_phone">휴대폰 번호</label><input type="tel" id="cPhone" placeholder="010-0000-0000" required></div>
+      <label class="c-agree"><input type="checkbox" required><span data-i18n="cs_agree">[필수] 개인정보 수집·이용에 동의합니다. (이름·연락처 / 상담 목적 / 접수 후 3년 보관)</span></label>
+      <button class="c-submit" type="submit" data-i18n="cs_submit">상담 예약</button>
+    </div>
+  </form>
+
+  <ul class="mem-terms"><li data-i18n="tm1">본 페이지는 시안 프로토타입으로, 혜택 구성·금액·조건은 실제 상품 출시 시 변경될 수 있습니다.</li><li data-i18n="tm2">무료 숙박권·바우처는 발행일로부터 1년간 유효하며 양도 시 사전 등록이 필요합니다.</li><li data-i18n="tm3">뷰티 혜택은 스톤하우스 및 제휴 클리닉(UH CELL·MEDICAL BLOOM·RE:NINE)에 적용됩니다.</li><li data-i18n="tm4">모빌리티 의전 서비스는 파파모빌리티 운영 지역 내에서 제공됩니다.</li></ul>
+</div>
+<footer>
+  <div class="wrap">
+    <div>
+      <p class="logo serif">UHC</p>
+      <p data-i18n="f_info">주식회사 유에이치씨</p>
+    </div>
+    <div>
+      <h5 data-i18n="f_brands">브랜드</h5>
+      <a href="continental.html">UH Continental</a>
+      <a href="suite.html">UH Suite</a>
+      <a href="flat.html">UH Flat</a>
+      <a href="dandelion.html">Dandelion</a>
+    </div>
+    <div>
+      <h5 data-i18n="f_amenity">뷰티 &amp; 라이프스타일</h5>
+      <a href="https://uhcell.com/" target="_blank" rel="noopener">UH Cell</a>
+      <a href="https://www.medicalbloom-coex.kr/" target="_blank" rel="noopener">Medical Bloom</a>
+      <a href="https://www.renine.kr/" target="_blank" rel="noopener">Re:Nine</a>
+      <a href="stonehouse.html">Stone House</a>
+      <a href="fnb.html">F&amp;B</a>
+      <a href="https://hanster88.github.io/deordinaire_Test_02/" target="_blank" rel="noopener">De-Ordinaire ↗</a>
+    </div>
+    <div>
+      <h5 data-i18n="f_service">서비스</h5>
+      <a href="https://web.stationbyuhc.com" target="_blank" rel="noopener" data-i18n="f_booking">통합 예약</a>
+      <a href="mobility.html" data-i18n="u_mobility">차량·의전 예약</a>
+      <a href="membership.html" data-i18n="u_membership">멤버십</a>
+      <a href="https://link.stationbyuhc.com/zbokav" target="_blank" rel="noopener" data-i18n="f_app">공식 앱</a>
+      <a href="https://forms.gle/GoKn4aTBbEc3YeGUA" target="_blank" rel="noopener" data-i18n="f_proposal">제휴·협업 문의</a>
+      <a href="admin.html" data-i18n="f_admin">관리자</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span data-i18n="f_copy">© 2026 UHC, Ltd. All rights reserved.</span>
+    <span>www.uhc-global.com</span>
+  </div>
+</footer>
+
+<div class="modal-mask" id="authMask">
+  <div class="auth-modal">
+    <button class="x">✕</button>
+    <h3 class="serif" data-i18n="au_title">UHC 멤버십</h3>
+    <p class="sub" data-i18n="au_sub">가입하고 전 브랜드 혜택을 받아보세요.</p>
+    <button class="sso kakao" data-sso="kakao"><svg class="ico" viewBox="0 0 24 24" fill="#191919"><path d="M12 3C6.48 3 2 6.54 2 10.9c0 2.8 1.86 5.26 4.66 6.65l-.95 3.51c-.08.31.27.56.54.38l4.19-2.77c.51.05 1.03.08 1.56.08 5.52 0 10-3.54 10-7.85S17.52 3 12 3z"/></svg><span data-i18n="au_kakao">카카오로 계속하기</span></button>
+    <button class="sso" data-sso="google"><svg class="ico" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg><span data-i18n="au_google">Google로 계속하기</span></button>
+    <button class="sso" data-sso="email"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span data-i18n="au_email">이메일로 계속하기</span></button>
+    <p class="auth-note" data-i18n="au_note">가입 시 이용약관 및 개인정보처리방침에 동의하게 됩니다.</p>
+    <span class="demo-badge" data-i18n="au_demo">시안 데모 — 실서비스 연동 전</span>
+  </div>
+</div>
+<script>window.PAGE_I18N = {"ko": {"sum": "스위트룸 클래스의 숙박과 가족 공유 Sub Card. 뷰티와 의전이 일상이 되는 멤버십.", "v_year": "/ 연", "bn_title": "클럽 혜택 구성", "ot_title": "다른 클럽 보기", "cs_title": "멤버십 상담 신청", "cs_sub": "회원관리팀이 운영시간(평일 09:00–17:30) 내 연락드립니다.", "cs_name": "이름 (국문)", "cs_ename": "이름 (영문)", "cs_phone": "휴대폰 번호", "cs_agree": "[필수] 개인정보 수집·이용에 동의합니다. (이름·연락처 / 상담 목적 / 접수 후 3년 보관)", "cs_submit": "상담 예약", "cs_done": "상담 신청이 접수되었습니다. (데모 — 브라우저 저장)", "v_consult": "상담 신청", "b1": "상시 객실 20% · F&B 20% 할인", "b2": "무료 숙박권 5매 (스위트룸 클래스)", "b3": "금액 할인권 130만원", "b4": "뷰티 6회 + 클리닉 프로그램 20% 할인", "b5": "와인 콜키지 프리 8매", "b6": "모빌리티 의전 6회", "b7": "E-SHOP 상품권 50만원", "b8": "Sub Card 1매 (가족 공유)", "tm1": "본 페이지는 시안 프로토타입으로, 혜택 구성·금액·조건은 실제 상품 출시 시 변경될 수 있습니다.", "tm2": "무료 숙박권·바우처는 발행일로부터 1년간 유효하며 양도 시 사전 등록이 필요합니다.", "tm3": "뷰티 혜택은 스톤하우스 및 제휴 클리닉(UH CELL·MEDICAL BLOOM·RE:NINE)에 적용됩니다.", "tm4": "모빌리티 의전 서비스는 파파모빌리티 운영 지역 내에서 제공됩니다."}, "en": {"sum": "Suite-class stays and a family sub card — where beauty and chauffeur service become everyday.", "v_year": "/ yr", "bn_title": "Club Benefits", "ot_title": "Explore Other Clubs", "cs_title": "Membership Consultation", "cs_sub": "Our team will contact you during business hours (weekdays 09:00–17:30).", "cs_name": "Name (Korean)", "cs_ename": "Name (English)", "cs_phone": "Phone Number", "cs_agree": "[Required] I agree to the collection and use of personal information.", "cs_submit": "Request Consultation", "cs_done": "Your request has been received. (Demo)", "v_consult": "Consult", "b1": "20% rooms · 20% F&B, always", "b2": "5 free nights (suite class)", "b3": "₩1,300,000 value voucher", "b4": "6 beauty visits + 20% off clinic programs", "b5": "8 wine corkage-free passes", "b6": "6 chauffeur services", "b7": "₩500,000 E-SHOP gift card", "b8": "1 sub card (family share)", "tm1": "This page is a prototype; benefits, prices and conditions may change at launch.", "tm2": "Vouchers are valid for one year from issue; transfers require prior registration.", "tm3": "Beauty benefits apply to Stone House and partner clinics (UH CELL·MEDICAL BLOOM·RE:NINE).", "tm4": "Chauffeur services are provided within PAPA Mobility's operating areas."}, "ja": {"sum": "スイートクラスの宿泊と家族共有サブカード。ビューティーと儀典が日常になるメンバーシップ。", "v_year": "/ 年", "bn_title": "クラブ特典の構成", "ot_title": "他のクラブを見る", "cs_title": "メンバーシップ相談申込", "cs_sub": "会員管理チームが営業時間内にご連絡します。", "cs_name": "お名前", "cs_ename": "お名前（英語）", "cs_phone": "携帯番号", "cs_agree": "[必須] 個人情報の収集·利用に同意します。", "cs_submit": "相談を予約", "cs_done": "相談申込を受け付けました。（デモ）", "v_consult": "相談申込", "b1": "客室20% · F&B20%常時割引", "b2": "無料宿泊券5枚（スイートクラス）", "b3": "金額割引券130万W", "b4": "ビューティー6回＋クリニック20%割引", "b5": "ワインコルケージ無料8枚", "b6": "儀典サービス6回", "b7": "E-SHOP商品券50万W", "b8": "サブカード1枚（家族共有）", "tm1": "本ページはプロトタイプであり、特典·金額·条件はリリース時に変更される場合があります。", "tm2": "宿泊券·バウチャーは発行日から1年間有効。譲渡には事前登録が必要です。", "tm3": "ビューティー特典はストーンハウスおよび提携クリニックに適用されます。", "tm4": "儀典サービスはパパモビリティの運営地域内で提供されます。"}, "zh": {"sum": "套房级住宿与家人共享副卡 — 让美容与礼宾服务成为日常的会员。", "v_year": "/ 年", "bn_title": "俱乐部权益构成", "ot_title": "查看其他俱乐部", "cs_title": "会员咨询申请", "cs_sub": "会员团队将在营业时间内与您联系。", "cs_name": "姓名", "cs_ename": "姓名（英文）", "cs_phone": "手机号码", "cs_agree": "[必填] 同意收集和使用个人信息。", "cs_submit": "预约咨询", "cs_done": "咨询申请已收到。（演示）", "v_consult": "预约咨询", "b1": "客房8折 · 餐饮8折", "b2": "免费住宿券5张（套房级）", "b3": "130万韩元代金券", "b4": "美容6次＋诊所项目8折", "b5": "免开瓶费8次", "b6": "礼宾专车6次", "b7": "E-SHOP礼品卡50万韩元", "b8": "副卡1张（家人共享）", "tm1": "本页面为设计原型，权益、金额与条件在正式上线时可能调整。", "tm2": "住宿券·代金券自发行日起1年内有效，转让需提前登记。", "tm3": "美容权益适用于Stone House及合作诊所。", "tm4": "礼宾出行服务在PAPA Mobility运营区域内提供。"}};</script>
+<script>function bindTilt(){
+  if(!window.matchMedia || !matchMedia('(pointer:fine)').matches) return;
+  document.querySelectorAll('[data-tilt]').forEach(function(card){
+    card.addEventListener('mousemove',function(e){
+      var r=card.getBoundingClientRect();
+      var x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+      card.style.transform='rotateY('+(x*9)+'deg) rotateX('+(-y*9)+'deg) translateY(-4px)';
+    });
+    card.addEventListener('mouseleave',function(){ card.style.transform=''; });
+  });
+}
+document.addEventListener('DOMContentLoaded',bindTilt);
+
+document.addEventListener('DOMContentLoaded',function(){
+  var form=document.getElementById('consultForm');
+  if(form) form.addEventListener('submit',function(e){
+    e.preventDefault();
+    try{
+      var list=JSON.parse(localStorage.getItem('uhc_consults')||'[]');
+      list.push({name:document.getElementById('cName').value, ename:document.getElementById('cEname').value,
+        phone:document.getElementById('cPhone').value, tier:"RESERVE", requested:new Date().toISOString().slice(0,16)});
+      localStorage.setItem('uhc_consults', JSON.stringify(list));
+    }catch(err){}
+    var d=Object.assign({},PAGE_I18N.ko,PAGE_I18N[window.UHC_LANG||'ko']||{});
+    alert(d.cs_done); form.reset();
+  });
+});
+</script>
+<script src="assets/common.js?v=10"></script>
+</body>
+</html>
